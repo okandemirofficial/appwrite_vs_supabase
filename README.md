@@ -1,16 +1,8 @@
 # appwrite_vs_supabase
 
-A new Flutter project.
+A comparison for Appwrite and Supabase with simple login and CRUD functionalities
 
-## Getting Started
+You can my see my related article from [here](https://okandemirdev.medium.com/appwrite-vs-supabase-pop%C3%BCler-2-firebase-alternatifi-%C3%BCzerine-i%CC%87zlenimlerim-2e8f46e6192e) (Only Turkish for now).
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
