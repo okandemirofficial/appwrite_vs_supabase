@@ -1,8 +1,15 @@
 import 'package:appwrite_vs_supabase/appwrite/appwrite_sign_in.dart';
+import 'package:appwrite_vs_supabase/firebase/firebase_sign_in.dart';
 import 'package:appwrite_vs_supabase/supabase/supabase_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -62,6 +69,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
               child: const Text('Supabase')),
+          ElevatedButton(
+              onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FirebaseSignInView(),
+                    ),
+                  ),
+              child: const Text('Firebase')),
         ],
       ),
     );

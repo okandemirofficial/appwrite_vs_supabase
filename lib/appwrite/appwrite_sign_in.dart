@@ -4,6 +4,9 @@ import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as models;
 import 'package:flutter/material.dart';
 
+const String databaseId = '6389edaaa74fb4b3aa76';
+const String collectionId = '638c456757d09e0ef0cc';
+
 class AppWriteSignInView extends StatefulWidget {
   const AppWriteSignInView({super.key});
 
@@ -15,6 +18,7 @@ class _AppWriteSignInViewState extends State<AppWriteSignInView> {
   String? email;
   String? password;
   String? carName;
+
   late final Client client;
   late final Account account;
   late final Databases databases;
@@ -78,22 +82,31 @@ class _AppWriteSignInViewState extends State<AppWriteSignInView> {
 
   carSubmit() async {
     databases.createDocument(
-        databaseId: '6389edaaa74fb4b3aa76',
-        collectionId: '6389edadb86907407050',
+        databaseId: databaseId,
+        collectionId: collectionId,
         documentId: ID.unique(),
         data: {'carName': carName});
   }
 
   deleteCar() async {
-    databases.deleteDocument(
-        databaseId: '6389edaaa74fb4b3aa76',
-        collectionId: '6389edadb86907407050',
-        documentId: '638b87996187a3d92c59');
+    models.DocumentList list = await databases.listDocuments(
+        databaseId: databaseId,
+        collectionId: collectionId,
+        queries: [Query.equal('carName', carName)]);
+
+    if (list.documents.isNotEmpty) {
+      databases.deleteDocument(
+          databaseId: '6389edaaa74fb4b3aa76',
+          collectionId: collectionId,
+          documentId: list.documents.first.$id);
+    } else {
+      throw Exception('entry couldnt find');
+    }
   }
 
   listCar() async {
     models.DocumentList result = await databases.listDocuments(
-        databaseId: '6389edaaa74fb4b3aa76', collectionId: '6389edadb86907407050');
+        databaseId: '6389edaaa74fb4b3aa76', collectionId: '638c456757d09e0ef0cc');
 
     List<String> internal = [];
     for (var e in result.documents) {
